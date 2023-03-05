@@ -5,7 +5,13 @@ export default function SignUpPage() {
     <>
       <section>
         <div>
-          <h2>SignUpPage</h2>
+          <h4
+            style={{
+              padding: '10px',
+            }}
+          >
+            You have to registration
+          </h4>
           <SignUpForm />
         </div>
       </section>

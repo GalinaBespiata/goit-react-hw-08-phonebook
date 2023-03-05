@@ -23,20 +23,42 @@ export function App() {
 
   return (
     <>
-      <header style={{ display: 'flex', gap: '15px' }}>
+      <header
+        style={{
+          display: 'flex',
+          gap: '15px',
+          padding: '10px',
+        }}
+      >
         <div>
-          <nav>
-            <ul style={{ display: 'flex', gap: '15px' }}>
-              <li>
-                <NavLink to={'/'}>Home Page</NavLink>
-              </li>
-              <li>
-                <NavLink to={'/contacts'}>Contacts</NavLink>
-              </li>
+          <nav style={{ display: 'flex' }}>
+            <ul
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                flexDirection: 'row',
+                gap: '150px',
+              }}
+            >
+              <ul
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  flexDirection: 'row',
+                  gap: '20px',
+                }}
+              >
+                <li>
+                  <NavLink to={'/'}>Home</NavLink>
+                </li>
+                <li>
+                  <NavLink to={'/contacts'}>Contacts</NavLink>
+                </li>
+              </ul>
               {isLoggedIn ? (
                 <UserMenu />
               ) : (
-                <ul>
+                <ul style={{}}>
                   <li>
                     <NavLink to={'/register'}>Register</NavLink>
                   </li>
