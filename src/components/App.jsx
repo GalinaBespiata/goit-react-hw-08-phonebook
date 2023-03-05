@@ -1,8 +1,7 @@
-import { Filter } from './Filter/Filter';
 import { useEffect } from 'react';
 import { Navigate, NavLink, Route, Routes } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { ContactList } from './ContactList/ContactList';
+
 import { UserMenu } from '../components/userMenu/UserMenu';
 import HomePage from 'pages/HomePage';
 import ContactPage from 'pages/ContactPage';
@@ -19,7 +18,7 @@ export function App() {
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
   useEffect(() => {
-    dispatch(refreshCurrentUser());
+    isLoggedIn && dispatch(refreshCurrentUser());
   }, [dispatch]);
 
   return (
@@ -53,6 +52,7 @@ export function App() {
       <main>
         <Routes>
           <Route path="/" element={<HomePage />} />
+
           <Route path="/register" element={<SignUpPage />} />
           <Route path="/login" element={<SignInPage />} />
 

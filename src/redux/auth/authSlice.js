@@ -51,7 +51,7 @@ const authSlice = createSlice({
       .addCase(refreshCurrentUser.pending, pendingHandler)
       .addCase(refreshCurrentUser.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user = action.payload;
+        state.user.name = action.payload.name;
 
         state.user.email = action.payload.email;
         state.isLoggedIn = true;
