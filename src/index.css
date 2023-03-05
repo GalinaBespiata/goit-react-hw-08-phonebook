@@ -35,3 +35,7 @@ img {
   display: block;
   width: 100%;
 }
+.active {
+  color: rgb(22, 99, 48);
+  border-bottom: 2px solid rgb(65, 148, 74);
+}

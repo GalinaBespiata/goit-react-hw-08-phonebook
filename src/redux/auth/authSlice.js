@@ -8,6 +8,8 @@ const authInitialState = {
   },
   isLoggedIn: false,
   token: null,
+  isLoading: false,
+  error: null,
 };
 
 const authSlice = createSlice({
@@ -60,12 +62,12 @@ const authSlice = createSlice({
 });
 
 function pendingHandler(state) {
-  state.user.isLoading = true;
-  state.user.error = null;
+  state.isLoading = true;
+  state.error = null;
 }
 function rejectHandler(state, action) {
-  state.user.isLoading = false;
-  state.user.error = action.payload;
+  state.isLoading = false;
+  state.error = action.payload;
 }
 
 export const authReducer = authSlice.reducer;
