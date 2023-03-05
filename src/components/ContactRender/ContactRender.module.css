@@ -1,0 +1,22 @@
+.contact {
+  display: flex;
+  flex-direction: row-reverse;
+  padding-left: 150px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.textContact {
+  border-color: #8c58c9;
+  background-color: rgb(178 52 121);
+  border-radius: 10px;
+  color: white;
+  font-size: 10px;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 20px;
+}
