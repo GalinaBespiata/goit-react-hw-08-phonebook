@@ -8,8 +8,16 @@ export function UserMenu() {
   const loginName = useSelector(selectLogin);
   return (
     <div>
-      <p>Hello, {loginName}</p>
-      <button type="button" onClick={() => dispatch(logOut())}>
+      <h3 style={{ color: '#893996', margin: '5px' }}>Hello, {loginName}</h3>
+      <button
+        type="button"
+        onClick={() => dispatch(logOut())}
+        style={{
+          backgroundColor: '#893996',
+          color: 'white',
+          borderRadius: '4px',
+        }}
+      >
         Logout
       </button>
     </div>

@@ -1,17 +1,21 @@
 import { useEffect } from 'react';
 import { Navigate, NavLink, Route, Routes } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { lazy, Suspense } from 'react';
 
-import { UserMenu } from '../components/userMenu/UserMenu';
-import HomePage from 'pages/HomePage';
-import ContactPage from 'pages/ContactPage';
+import { Loader } from 'Loader/Loader';
 
 import { useSelector } from 'react-redux';
 
-import SignUpPage from 'pages/SignUpPage';
-import SignInPage from 'pages/SignInPage';
+import { UserMenu } from '../components/userMenu/UserMenu';
+
 import { selectIsLoggedIn } from 'redux/auth/selectorsAuth';
 import { refreshCurrentUser } from 'redux/auth/operationsAuth';
+
+const LazyHomePage = lazy(() => import('pages/HomePage'));
+const LazyContactPage = lazy(() => import('pages/ContactPage'));
+const LazySignUpPage = lazy(() => import('pages/SignUpPage'));
+const LazySignInPage = lazy(() => import('pages/SignInPage'));
 
 export function App() {
   const dispatch = useDispatch();
@@ -19,7 +23,7 @@ export function App() {
 
   useEffect(() => {
     isLoggedIn && dispatch(refreshCurrentUser());
-  }, [dispatch]);
+  }, [dispatch, isLoggedIn]);
 
   return (
     <>
@@ -36,8 +40,8 @@ export function App() {
               style={{
                 display: 'flex',
                 justifyContent: 'space-between',
-                flexDirection: 'row',
-                gap: '150px',
+                flexDirection: 'column',
+                gap: '10px',
               }}
             >
               <ul
@@ -48,20 +52,33 @@ export function App() {
                   gap: '20px',
                 }}
               >
-                <li>
+                <li
+                  style={{
+                    border: '2px solid #893996',
+                    borderRadius: '10px',
+                    padding: '3px',
+                  }}
+                >
                   <NavLink to={'/'}>Home</NavLink>
                 </li>
-                <li>
+                <li
+                  style={{
+                    border: '2px solid #893996',
+                    borderRadius: '10px',
+                    padding: '3px',
+                  }}
+                >
                   <NavLink to={'/contacts'}>Contacts</NavLink>
                 </li>
               </ul>
               {isLoggedIn ? (
                 <UserMenu />
               ) : (
-                <ul style={{}}>
+                <ul style={{ display: 'flex', flexDirection: 'row' }}>
                   <li>
                     <NavLink to={'/register'}>Register</NavLink>
                   </li>
+                  <span>/</span>
                   <li>
                     <NavLink to={'/login'}>Login</NavLink>
                   </li>
@@ -72,15 +89,17 @@ export function App() {
         </div>
       </header>
       <main>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
+        <Suspense fallback={<Loader />}>
+          <Routes>
+            <Route path="/" element={<LazyHomePage />} />
 
-          <Route path="/register" element={<SignUpPage />} />
-          <Route path="/login" element={<SignInPage />} />
+            <Route path="/register" element={<LazySignUpPage />} />
+            <Route path="/login" element={<LazySignInPage />} />
 
-          <Route path="/contacts" element={<ContactPage />} />
-          <Route path="*" element={<Navigate to={'/'} />} />
-        </Routes>
+            <Route path="/contacts" element={<LazyContactPage />} />
+            <Route path="*" element={<Navigate to={'/'} />} />
+          </Routes>
+        </Suspense>
       </main>
     </>
   );
