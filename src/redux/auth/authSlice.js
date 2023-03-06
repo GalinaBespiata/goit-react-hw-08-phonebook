@@ -58,7 +58,10 @@ const authSlice = createSlice({
         state.user.email = action.payload.email;
         state.isLoggedIn = true;
       })
-      .addCase(refreshCurrentUser.rejected, rejectHandler),
+      .addCase(refreshCurrentUser.rejected, state => {
+        state.isLoading = false;
+        state.token = null;
+      }),
 });
 
 function pendingHandler(state) {

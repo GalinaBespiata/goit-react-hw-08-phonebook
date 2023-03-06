@@ -24,7 +24,6 @@ function ContactPage() {
 
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'flex-end',
 
         color: '#4b193e',
         flexDirection: 'column',

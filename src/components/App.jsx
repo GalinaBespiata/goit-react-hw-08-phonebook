@@ -22,8 +22,8 @@ export function App() {
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
   useEffect(() => {
-    isLoggedIn && dispatch(refreshCurrentUser());
-  }, [dispatch, isLoggedIn]);
+    dispatch(refreshCurrentUser());
+  }, [dispatch]);
 
   return (
     <>
@@ -61,15 +61,17 @@ export function App() {
                 >
                   <NavLink to={'/'}>Home</NavLink>
                 </li>
-                <li
-                  style={{
-                    border: '2px solid #893996',
-                    borderRadius: '10px',
-                    padding: '3px',
-                  }}
-                >
-                  <NavLink to={'/contacts'}>Contacts</NavLink>
-                </li>
+                {isLoggedIn && (
+                  <li
+                    style={{
+                      border: '2px solid #893996',
+                      borderRadius: '10px',
+                      padding: '3px',
+                    }}
+                  >
+                    <NavLink to={'/contacts'}>Contacts</NavLink>
+                  </li>
+                )}
               </ul>
               {isLoggedIn ? (
                 <UserMenu />
